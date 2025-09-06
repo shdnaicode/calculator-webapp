@@ -7,41 +7,41 @@ const outputWindow = document.querySelector(".output-window");
 let firstNum = "";
 let operator = "";
 let secondNum = "";
+let isNegative = false;
 
 const buttonSound = () => {
   buttonAudio.play();
 };
 
 const buttonClear = () => {
-    firstNum = "";
-    operator = "";
-    secondNum = "";
+  firstNum = "";
+  operator = "";
+  secondNum = "";
+  outputWindow.innerHTML = "";
 };
 
 const buttonNumber = (event) => {
   const keyNum = event.target.value;
-  outputWindow.innerHTML = firstNum + operator + secondNum;
 
   if (!isNaN(keyNum)) {
-    outputWindow.innerHTML += keyNum;
-
-    if (!operator) {
-      firstNum += keyNum;
+    if (isNegative) {
+      if (!operator) firstNum = "-" + keyNum;
+      else secondNum = "-" + keyNum;
+      isNegative = false;
     } else {
-      secondNum += keyNum;
+      if (!operator) firstNum += keyNum;
+      else secondNum += keyNum;
     }
   } else if (keyNum === "-") {
-    operator = keyNum;
-    outputWindow.innerHTML += keyNum;
-  } else if (keyNum === "+") {
-    operator = keyNum;
-    outputWindow.innerHTML += keyNum;
-  } else if (keyNum === "÷") {
-    operator = keyNum;
-    outputWindow.innerHTML += keyNum;
-  } else if (keyNum === "×") {
-    operator = keyNum;
-    outputWindow.innerHTML += keyNum;
+    if (!firstNum) {
+      isNegative = true;
+    } else if (operator && !secondNum) {
+      isNegative = true;
+    } else {
+      operator = "-";
+    }
+  } else if (["×", "+", "÷"].includes(keyNum)) {
+    if (firstNum) operator = keyNum;
   } else if (keyNum === "=") {
     const num1 = Number(firstNum);
     const num2 = Number(secondNum);
