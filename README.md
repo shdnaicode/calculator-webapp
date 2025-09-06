@@ -2,7 +2,7 @@
 
 Basic calculator webapp project with logic handling function for basic arithmetic written in HTML (Hypertext Markup Langauge), CSS (Cascading Style Sheets), and Javascript.
 
-![Preview](calculator_webapp/assets/calculatorPreview.png)
+![Preview](/assets/calculatorPreview.png)
 
 ## Technologies
 - HTML: Standard markup langauge for page structure.
